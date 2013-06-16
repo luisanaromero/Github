@@ -222,7 +222,7 @@ public class Github
             System.out.println("3. Buscar obras por autor");
             System.out.println("4. Buscar películas por autor");
             System.out.println("5. Volver al menu");
-            System.out.print("   Ingrese la opción: ");
+            System.out.print("Ingrese la opción: ");
             try {
                 opc = Integer.parseInt(entrada.readLine());
             } catch (NumberFormatException ex) {
