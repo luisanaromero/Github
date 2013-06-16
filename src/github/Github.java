@@ -41,7 +41,7 @@ public class Github
         
         while (opc != 5)
         {
-            System.out.println("***** Menú *****");
+            System.out.println("***** Menú Principal *****");
             System.out.println("Seleccione una opción: ");
             System.out.println(" 1. Artista  ");
             System.out.println(" 2. Obra");
@@ -59,10 +59,11 @@ public class Github
             switch(opc)
             {
                 case 1:  //artista
-                    autor_buscar();
+                    menuautor();
                     break;
                 case 2:  //obra
-                      break;
+                    menuobra("Obra");  
+                    break;
                 case 3:  // peliculas
                     break;
                 case 4: // Reportes
@@ -76,8 +77,10 @@ public class Github
         }  
     }
     
-    /////////////////////////////////// metodos de seleccion Menus
-     public void autor_buscar() throws IOException
+    /////////////////////////////////// metodos 
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////  Menu Artista
+     public void menuautor() throws IOException
     {
         int opc = 0;
         String nombre;
@@ -85,7 +88,7 @@ public class Github
         
         while (opc != 4)
         {
-            System.out.println("***** Menu Artista *****");
+            System.out.println("***** SubMenú Artista *****");
             System.out.println(" 1. Registrar Autor  ");
             System.out.println(" 2. Buscar Autor");
             System.out.println(" 3. Listar todos los Autores");
@@ -115,13 +118,49 @@ public class Github
                     break;
                 case 3: // Listar                   
                     artista.listarautores(autor);
-                    break;                
+                    break;
+                case 4:
+                    System.out.println("Retorno al Menú Principal");
+                    return;
                 default: 
                     System.out.println("Opción Errada");
             }
         }  
     
     }
-    
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////  Menu Obra
+    public void menuobra(String men) throws IOException
+    {
+        int opc = 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));
+        while (opc != 3)
+        {
+            System.out.println("***** SubMenú Obra *****");
+            System.out.println(men+": 1. Libro  ");
+            System.out.println(men+": 2. Disco");
+            System.out.println("\t3. Salir");
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            switch(opc)
+            {                        
+                case 1://libro
+                   
+                    break;
+                case 2://disco
+                   
+                    break;
+                case 3:
+                    System.out.println("Retorno al Menú Principal");
+                    return;
+                default: 
+                    System.out.println("\n  ** Opción Errada **");
+            };
+            
+        }    
+    } 
     
 }
