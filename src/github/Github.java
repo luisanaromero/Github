@@ -150,10 +150,10 @@ public class Github
             switch(opc)
             {                        
                 case 1://libro
-                   
+                    menulibro();
                     break;
                 case 2://disco
-                   
+                    menudisco();
                     break;
                 case 3:
                     System.out.println("Retorno al Menú Principal");
@@ -164,6 +164,226 @@ public class Github
             
         }    
     } 
+    ////////////////////////  Submenu Libro
+    public void menulibro() throws IOException
+    {
+        int opc = 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));
+        
+        while (opc != 4)
+        {
+            System.out.println("***** SubMenu Libro *****");
+            System.out.println("1. Cargar Libro");
+            System.out.println("2. Buscar Libro");
+            System.out.println("3. Listar Libros");
+            System.out.println("4. Salir");
+            System.out.print("Ingrese la opción: ");
+
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            
+            switch(opc)
+            {
+                case 1: 
+                    libro.registrarlibros(autor);
+                    libros.add(libro);
+                    libro = new Libro();
+                    break;
+                case 2:
+                    consultarlibro();
+                    break;
+                case 3:
+                    libro.imprimirlibros(libros);
+                    break;
+                case 4: 
+                    System.out.println("Retorno al Menú Principal");
+                    return;
+                default: 
+                    System.out.println("Opción Errada");
+            }
+        }  
+    
+    }
+    public void consultarlibro() throws IOException
+    {
+        int opc = 0;
+        String titulo;
+        List<Libro> libros_listados;
+        int numpaginas;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));
+        while (opc != 3)
+        {
+            System.out.println("***** Consultar Libros ** ");
+            System.out.println("1. Por Título");
+            System.out.println("2. Por Editorial");
+            System.out.println("3. Por Número de Páginas");
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            switch(opc)
+            {                        
+                case 1:
+                    System.out.println("Introduzca el título a consultar:");
+                    titulo = entrada.readLine();
+                    libros_listados = libro.buscarlibros(libros, titulo);
+                    if(libros_listados == null || libros_listados.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun libro con ese nombre.");
+                    }
+                    else
+                    {
+                        libro.imprimirlibros(libros_listados);
+                    }
+                    break;
+                case 2:
+                    System.out.println("Introduzca la editorial a consultar:");
+                    titulo = entrada.readLine();
+                    libros_listados = libro.libro_editorial(libros, titulo);
+                    if(libros_listados == null || libros_listados.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun libro con esa editorial.");
+                    }
+                    else
+                    {
+                        libro.imprimirlibros(libros_listados);
+                    }
+                    break; 
+                case 3:
+                    System.out.println("Introduzca un Número de Páginas a consultar:");
+                    try {
+                        numpaginas = Integer.parseInt(entrada.readLine());
+                        libros_listados = libro.libros_numpaginas(libros, String.valueOf(numpaginas));
+                        if(libros_listados == null || libros_listados.isEmpty())
+                        {
+                               System.out.println("No se encontro ningun libro con ese número de páginas.");
+                        }
+                        else
+                        {
+                            libro.imprimirlibros(libros_listados);
+                        }
+                    } catch (NumberFormatException ex) {
+                        numpaginas = 0;     
+                        System.out.println("Dato errado");
+                    }
+                    break; 
+                default: 
+                    System.out.println("Opción Errada");
+            };
+        }
+    }
+    ////////////////////////  Submenu Disco
+    public void menudisco() throws IOException
+    {
+        int opc = 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));
+        
+        while (opc != 4)
+        {
+            System.out.println("***** SubMenú Disco *****");
+            System.out.println("1. Cargar Disco");
+            System.out.println("2. Consultar Disco");
+            System.out.println("3. Listar Discos");
+            System.out.println("4. Salir");
+            System.out.print("Ingrese la opción: ");
+
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            
+            switch(opc)
+            {
+                case 1: 
+                    disco.registrardiscos(autor);
+                    discos.add(disco);
+                    disco = new Disco();
+                    break;
+                case 2:
+                    consultardisco();
+                    break;
+                case 3:
+                    disco.imprimirdiscos(discos);
+                    break;
+                case 4: 
+                    System.out.println("Retorno al Menú Principal");
+                    return;
+                default: 
+                    System.out.println("Opción Errada");
+            }
+        }      
+    }
+    public void consultardisco() throws IOException
+    {
+        int opc = 0;
+        String titulo;
+        List<Disco> discos_listados;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));
+        while (opc != 3)
+        {
+            System.out.println("***** Consultar Disco *****");
+            System.out.println("1. Por Título  ");
+            System.out.println("2. Por Discografía");
+            System.out.println("3. Por Canciones");
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            switch(opc)
+            {                        
+                case 1:
+                    System.out.println("Introduzca el Título del album:");
+                    titulo = entrada.readLine();
+                    discos_listados = disco.buscardiscos(discos, titulo);
+                    if(discos_listados == null || discos_listados.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun disco con ese titulo.");
+                    }
+                    else
+                    {
+                        disco.imprimirdiscos(discos_listados);
+                    }
+                    break;
+                case 2:
+                    System.out.println("Introduzca un nombre para buscar por Discografia:");
+                    titulo = entrada.readLine();
+                    discos_listados = disco.disco_discografia(titulo, discos);
+                    if(discos_listados == null || discos_listados.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun libro con esa editorial.");
+                    }
+                    else
+                    {
+                        disco.imprimirdiscos(discos_listados);
+                    }
+                    break; 
+                case 3:
+                    System.out.println("Introduzca un nombre para buscar por Discografia:");
+                    titulo = entrada.readLine();
+                    discos_listados = disco.disco_canciones(titulo, discos);
+                    if(discos_listados == null || discos_listados.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun libro con esa editorial.");
+                    }
+                    else
+                    {
+                        disco.imprimirdiscos(discos_listados);
+                    }
+                    break; 
+                default: 
+                    System.out.println("Opción Errada");
+            }            
+        }    
+    
+    }
+    
+    
     /////////////////////////////////////////////////////////////////////////
     ////////////////////////  Menu Peliculas
     public void menupelicula() throws IOException
