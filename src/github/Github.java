@@ -41,14 +41,13 @@ public class Github
         
         while (opc != 5)
         {
-            System.out.println("***** Menú Principal *****");
-            System.out.println("Seleccione una opción: ");
-            System.out.println(" 1. Artista  ");
-            System.out.println(" 2. Obra");
-            System.out.println(" 3. Película");
-            System.out.println(" 4. Reportes");
-            System.out.println(" 5. Salir");
-            System.out.print(" Ingrese la opción: ");
+            System.out.println("***** Menú Principal *****");           
+            System.out.println("1. Artista");
+            System.out.println("2. Obra");
+            System.out.println("3. Película");
+            System.out.println("4. Reportes");
+            System.out.println("5. Salir");
+            System.out.print("Ingrese la opción: ");
             try {
            
                 opc = Integer.parseInt(entrada.readLine());
@@ -65,8 +64,10 @@ public class Github
                     menuobra("Obra");  
                     break;
                 case 3:  // peliculas
+                    menupelicula();
                     break;
-                case 4: // Reportes
+                case 4: // reportes
+                    menureportes();
                     break;
                 case 5:
                     System.out.println("Finalizó");
@@ -89,11 +90,11 @@ public class Github
         while (opc != 4)
         {
             System.out.println("***** SubMenú Artista *****");
-            System.out.println(" 1. Registrar Autor  ");
-            System.out.println(" 2. Buscar Autor");
-            System.out.println(" 3. Listar todos los Autores");
-            System.out.println(" 4. Salir");
-            System.out.print(" Ingrese la opción: ");
+            System.out.println("1. Registrar Autor");
+            System.out.println("2. Consultar Autor");
+            System.out.println("3. Listar Autores");
+            System.out.println("4. Salir");
+            System.out.print("Ingrese la opción: ");
 
             try {
            
@@ -137,9 +138,10 @@ public class Github
         while (opc != 3)
         {
             System.out.println("***** SubMenú Obra *****");
-            System.out.println(men+": 1. Libro  ");
+            System.out.println(men+": 1. Libro");
             System.out.println(men+": 2. Disco");
             System.out.println("\t3. Salir");
+            System.out.print("Ingrese la opción: ");
             try {
                 opc = Integer.parseInt(entrada.readLine());
             } catch (NumberFormatException ex) {
@@ -157,10 +159,92 @@ public class Github
                     System.out.println("Retorno al Menú Principal");
                     return;
                 default: 
-                    System.out.println("\n  ** Opción Errada **");
+                    System.out.println("Opción Errada");
             };
             
         }    
     } 
-    
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////  Menu Peliculas
+    public void menupelicula() throws IOException
+    {
+        int opc = 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));
+        
+        while (opc != 5)
+        {
+            System.out.println("***** SubMenú Película *****");
+            System.out.println("1. Registrar Película");
+            System.out.println("2. Consultar Película");
+            System.out.println("3. Listar Películas");
+            System.out.println("4. Consultar Productora");
+            System.out.println("5. Listar Productoras");
+            System.out.println("6. Salir");
+            System.out.print("Ingrese la opción: ");
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            switch(opc)
+            {
+                case 1: //registrar peliculas                    
+                    break;
+                case 2: //buscar peliculas                   
+                    break;
+                case 3://listar peliculas                    
+                    break;
+                case 4: // buscar productora                    
+                    break;
+                case 5: //listar productoras                    
+                    break;
+                 case 6:
+                    System.out.println("Retorno al Menú Principal");
+                    return;                       
+                default: 
+                    System.out.println("Opción Errada");
+            }
+        }  
+   
+    }    
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////  Menu Reportes
+    public void menureportes() throws IOException
+    {
+        int opc = 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));  
+        
+        while (opc!= 5)
+        {                    
+            System.out.println("***** SubMenú Reportes *****");
+            System.out.println("1. Listado de Obras");
+            System.out.println("2. Listado de Películas");
+            System.out.println("3. Buscar obras por autor");
+            System.out.println("4. Buscar películas por autor");
+            System.out.println("5. Volver al menu");
+            System.out.print("   Ingrese la opción: ");
+            try {
+                opc = Integer.parseInt(entrada.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            switch(opc)
+            {                        
+                case 1://listado de obras: discos y libros
+                    break;
+                case 2:// listado de películas  
+                    break; 
+                case 3://buscar obras por autor(nombre)
+                    break;
+                case 4://Buscar películas por autor(nombre) 
+                    break;
+                case 5:
+                    System.out.println("Retorno al Menú Principal");
+                    break;
+                default: 
+                    System.out.println("Opción Errada");
+            };
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////    
 }
