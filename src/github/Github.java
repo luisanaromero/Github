@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -499,40 +499,76 @@ break;
     }
 /////////////////////////////////////////////////////////////////////////
     ////////////////////////  Menu Reportes
-    public void menureportes() throws IOException
+   public void menuReportes() throws IOException
     {
-        int opc = 0;
-        BufferedReader entrada = new BufferedReader(new InputStreamReader (System.in));  
-        
-        while (opc!= 5)
+        int crear_reporte = 0;
+        String nombre_busqueda;
+        List<Pelicula> resultado_busqueda;
+	 List<Obra> resultado_busqueda1;
+        InputStreamReader entrada = new InputStreamReader(System.in);
+        BufferedReader buf = new BufferedReader(entrada);
+        while (crear_reporte != 5)
         {                    
-            System.out.println("***** SubMenú Reportes *****");
-            System.out.println("1. Listado de Obras");
-            System.out.println("2. Listado de Películas");
-            System.out.println("3. Buscar obras por autor");
-            System.out.println("4. Buscar películas por autor");
-            System.out.println("5. Volver al menu");
-            System.out.print("Ingrese la opción: ");
+            System.out.println("\n   ** Reportes **");
+            System.out.println("   1. Lista de Obras");
+            System.out.println("   2. Lista de Películas");
+            System.out.println("   3. Busqueda obras por autor");
+            System.out.println("   4. Busqueda películas por autor");
+            System.out.println("   5. Volver al menu");
+            System.out.print("   Ingrese la opción: ");
+
             try {
-                opc = Integer.parseInt(entrada.readLine());
+                crear_reporte = Integer.parseInt(buf.readLine());
             } catch (NumberFormatException ex) {
-                opc = 0;               
+                crear_reporte = 0;               
             }
-            switch(opc)
+            switch(crear_reporte)
             {                        
-                case 1://listado de obras: discos y libros
+                case 1:
+                    System.out.println("     Listado de Obras  ");
+                    System.out.println("        Listado de Libros  ");
+                    libro.imprimirLibros(libros);
+                    System.out.println("        Listado de Discos  ");
+                    disco.imprimirDisco(discos)
                     break;
-                case 2:// listado de películas  
+                case 2:
+                    System.out.println("     Listado de Películas  ");
+                    pelicula.mostrarPeliculas(peliculas);
                     break; 
-                case 3://buscar obras por autor(nombre)
+                case 3:
+                    System.out.println("     Buscar obras por autor ");
+		    System.out.println("Introduzca un nombre de la obra:");
+                    nombre_busqueda = buf.readLine();
+                    resultado_busqueda1 = obra.buscarObraPorAutor(nombre_busqueda, obras);
+                    if(resultado_busqueda1 == null || resultado_busqueda1.isEmpty())
+                    {
+                           System.out.println("No se encontro ninguna obra de ese autor.");
+                    }
+                    else
+                    {
+                        obra.mostrarObras(resultado_busqueda1);
+                    }                                       
                     break;
-                case 4://Buscar películas por autor(nombre) 
+                    break;
+                case 4:
+                    System.out.println("     Buscar películas por autor ");
+                    System.out.println("Introduzca un nombre para buscar por autor:");
+                    nombre_busqueda = buf.readLine();
+                    resultado_busqueda = pelicula.buscarPeliculaPorAutor(nombre_busqueda, peliculas);
+                    if(resultado_busqueda == null || resultado_busqueda.isEmpty())
+                    {
+                           System.out.println("No se encontro ninguna pelicula de ese autor.");
+                    }
+                    else
+                    {
+                        pelicula.mostrarPeliculas(resultado_busqueda);
+                    }                                       
                     break;
                 case 5:
-                    System.out.println("Retorno al Menú Principal");
+                    System.out.println("\n  Volver al menu");
                     break;
                 default: 
-                    System.out.println("Opción Errada");
+                    System.out.println("\n  ** Opción Errada **");
             };
         }
     }
