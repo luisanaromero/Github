@@ -398,8 +398,7 @@ public class Github
             System.out.println("2. Consultar Película");
             System.out.println("3. Listar Películas");
             System.out.println("4. Consultar Productora");
-            System.out.println("5. Listar Productoras");
-            System.out.println("6. Salir");
+            System.out.println("5. Salir");
             System.out.print("Ingrese la opción: ");
             try {
                 opc = Integer.parseInt(entrada.readLine());
@@ -409,16 +408,22 @@ public class Github
             switch(opc)
             {
                 case 1: //registrar peliculas                    
-                    break;
+                  pelicula.cargarDatos(artistas);
+                    peliculas.add(pelicula);
+                    pelicula = new Pelicula();
+		  break;
                 case 2: //buscar peliculas                   
+             
+                    subMenuBuscarPeliuclas();
                     break;
+    
                 case 3://listar peliculas                    
                     break;
                 case 4: // buscar productora                    
-                    break;
-                case 5: //listar productoras                    
-                    break;
-                 case 6:
+                   pelicula.mostrarPeliculas(peliculas);
+  
+break;
+                                 case 5:
                     System.out.println("Retorno al Menú Principal");
                     return;                       
                 default: 
@@ -427,7 +432,72 @@ public class Github
         }  
    
     }    
-    /////////////////////////////////////////////////////////////////////////
+    public void subMenuBuscarPeliuclas() throws IOException
+    {
+        int opc = 0;
+        String tituloParaBuscar;
+        List<Pelicula> peliculasEncontradas;
+        InputStreamReader entrada = new InputStreamReader(System.in);
+        BufferedReader buf = new BufferedReader(entrada);
+        while (opc != 3)
+        {
+            System.out.println("\n\t   ** Busquedas: ** ");
+            System.out.println(" \t Por Titulo  ");
+            System.out.println(" \t Por Prodcutora");
+            System.out.println(" \t Por Autor");
+            try {
+                opc = Integer.parseInt(buf.readLine());
+            } catch (NumberFormatException ex) {
+                opc = 0;               
+            }
+            switch(opc)
+            {                        
+                case 1:
+                    System.out.println("Introduzca un nombre para buscar por titulo:");
+                    tituloParaBuscar = buf.readLine();
+                    peliculasEncontradas = pelicula.buscarPeliculaPorTitulo(tituloParaBuscar, peliculas);
+                    if(peliculasEncontradas == null || peliculasEncontradas.isEmpty())
+                    {
+                           System.out.println("No se encontro ninguna pelicula con ese nombre.");
+                    }
+                    else
+                    {
+                        pelicula.mostrarPeliculas(peliculasEncontradas);
+                    }
+                    break;
+                case 2:
+                    System.out.println("Introduzca un nombre para buscar por productora:");
+                    tituloParaBuscar = buf.readLine();
+                    peliculasEncontradas = pelicula.buscarPeliculaPorProductora(tituloParaBuscar, peliculas);
+                    if(peliculasEncontradas == null || peliculasEncontradas.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun libro con esa editorial.");
+                    }
+                    else
+                    {
+                    pelicula.mostrarPeliculas(peliculasEncontradas);
+                    }
+                    break; 
+                case 3:
+                    System.out.println("Introduzca un nombre para buscar por autor:");
+                    tituloParaBuscar = buf.readLine();
+                    peliculasEncontradas = pelicula.buscarPeliculaPorAutor(tituloParaBuscar, peliculas);
+                    if(peliculasEncontradas == null || peliculasEncontradas.isEmpty())
+                    {
+                           System.out.println("No se encontro ningun libro con esa editorial.");
+                    }
+                    else
+                    {
+                        pelicula.mostrarPeliculas(peliculasEncontradas);
+                    }
+                    break; 
+                default: 
+                    System.out.println("\n  ** Opción Errada **");
+            }            
+        }    
+    
+    }
+/////////////////////////////////////////////////////////////////////////
     ////////////////////////  Menu Reportes
     public void menureportes() throws IOException
     {
